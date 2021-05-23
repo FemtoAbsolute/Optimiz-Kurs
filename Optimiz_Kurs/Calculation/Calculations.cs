@@ -27,11 +27,8 @@ namespace Optimiz_Kurs.Calculation
                         double S = 1.0 * (2.0 * 1.0) * (Math.Pow((i - j), 2) + Math.Pow((1.0 * 1.0 - i), 2));
                         table.Rows.Add(Math.Round(i,2), Math.Round(j,2), Math.Round(S*100, 0));
                     }
-
                 }
             return table;
         }
-    
-
     }
 }

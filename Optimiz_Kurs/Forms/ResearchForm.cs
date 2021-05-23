@@ -82,7 +82,21 @@ namespace Optimiz_Kurs
 
         private void Build2DChartButton_Click(object sender, EventArgs e)
         {
-            Chart2DForm form = new Chart2DForm(table);
+            Chart2DForm form = null;
+            if (MessageBox.Show("Пересчитать данные для графика?", "Выбор отрисовки", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                using (Calculation.TaskContext dbase = new Calculation.TaskContext())
+                {
+                    string variant = VariantCombobox.SelectedItem.ToString();
+                    var task = dbase.Tasks.Where(p => p.Variant.ToString() == variant);
+                    form = new Chart2DForm(0, task.FirstOrDefault().MinT1, task.FirstOrDefault().MinT2, task.FirstOrDefault().MaxT1, task.FirstOrDefault().MaxT2);
+                }
+            }
+            else
+            {
+                form = new Chart2DForm(table);
+            }
+
             this.Hide();
             form.ShowDialog();
             this.Show();

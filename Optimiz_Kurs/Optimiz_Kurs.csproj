@@ -65,6 +65,7 @@
     <Compile Include="Calculation\DragControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Calculation\Functions.cs" />
     <Compile Include="Forms\Chart2DForm.cs">
       <SubType>Form</SubType>
     </Compile>
