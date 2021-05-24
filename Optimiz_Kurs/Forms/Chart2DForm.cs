@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using Optimiz_Kurs.Calculation;
@@ -15,7 +16,7 @@ namespace Optimiz_Kurs
             DrawChart();
         }
 
-        public Chart2DForm(Func<double, double, double> function, Func<double, double, bool> restrictions, double minT1, double minT2, double maxT1, double maxT2)
+        public Chart2DForm(Func<Dictionary<string, double>, double> function, Func<double, double, bool> restrictions, double minT1, double minT2, double maxT1, double maxT2)
         {
             InitializeComponent();
             DrawChart(function, restrictions, minT1, minT2, maxT1, maxT2);
@@ -66,7 +67,7 @@ namespace Optimiz_Kurs
             }
         }
 
-        public void DrawChart(Func<double, double, double> function, Func<double, double, bool> restrictions, double minT1, double minT2, double maxT1, double maxT2)
+        public void DrawChart(Func<Dictionary<string, double>, double> function, Func<double, double, bool> restrictions, double minT1, double minT2, double maxT1, double maxT2)
         {
             for (double x = minT1; x <= maxT1; x += 0.01)
             {
@@ -75,7 +76,7 @@ namespace Optimiz_Kurs
                     if (!restrictions(x, y))
                         continue;
 
-                    double S = function(x, y);
+                    double S = function(new Dictionary<string, double>() { { "T1", x }, { "T2", y } });
                     S = S >= 1000 ? Math.Round(S / 100, 0) * 100 : Math.Round(S / 10, 0) * 10;
                     
                     if (S == 50)

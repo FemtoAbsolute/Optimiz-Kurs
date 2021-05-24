@@ -173,7 +173,7 @@ namespace Optimiz_Kurs
             this.LoginTextbox.Location = new System.Drawing.Point(80, 89);
             this.LoginTextbox.Name = "LoginTextbox";
             this.LoginTextbox.Size = new System.Drawing.Size(212, 29);
-            this.LoginTextbox.TabIndex = 68;
+            this.LoginTextbox.TabIndex = 1;
             // 
             // PasswordTextbox
             // 
@@ -182,7 +182,7 @@ namespace Optimiz_Kurs
             this.PasswordTextbox.Name = "PasswordTextbox";
             this.PasswordTextbox.PasswordChar = '*';
             this.PasswordTextbox.Size = new System.Drawing.Size(212, 29);
-            this.PasswordTextbox.TabIndex = 68;
+            this.PasswordTextbox.TabIndex = 2;
             // 
             // LoginButton
             // 
@@ -191,7 +191,7 @@ namespace Optimiz_Kurs
             this.LoginButton.Location = new System.Drawing.Point(130, 195);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(111, 40);
-            this.LoginButton.TabIndex = 69;
+            this.LoginButton.TabIndex = 3;
             this.LoginButton.Text = "Войти";
             this.LoginButton.UseVisualStyleBackColor = false;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
