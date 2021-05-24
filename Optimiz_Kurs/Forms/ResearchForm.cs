@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DynamicExpresso;
+using Optimiz_Kurs.Calculation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +15,9 @@ namespace Optimiz_Kurs
     public partial class ResearchForm : Form
     {
         public string name;
+        public Func<double, double, double> func;
+        public Func<double, double, bool> conditionsSecType;
+
         public ResearchForm(string name)
         {
             InitializeComponent();
@@ -55,6 +60,9 @@ namespace Optimiz_Kurs
                 MaxT2Textbox.Text = task.FirstOrDefault().MaxT2.ToString();
                 SecondTypeTextbox.Text = task.FirstOrDefault().ConditionsSecType;
                 AccuracyNumeric.Value = (decimal)task.FirstOrDefault().Accuracy;
+
+                func = new Interpreter().ParseAsDelegate<Func<double, double, double>>(FunctionTextbox.Text, new string[] { "T1", "T2" });
+                conditionsSecType = new Interpreter().ParseAsDelegate<Func<double, double, bool>>(SecondTypeTextbox.Text, new string[] { "T1", "T2" });
             }
         }
         DataTable table = new DataTable();
@@ -62,17 +70,19 @@ namespace Optimiz_Kurs
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             try { 
-                if(MethodCombobox.SelectedItem.ToString() == "Метод Сканирования" && VariantCombobox.SelectedItem.ToString() == "5")
-                using (Calculation.TaskContext dbase = new Calculation.TaskContext())
+                if (MethodCombobox.SelectedItem.ToString() == "Метод Сканирования")
                 {
-                    string variant = VariantCombobox.SelectedItem.ToString();
-                    var task = dbase.Tasks.Where(p => p.Variant.ToString() == variant);
-                    Calculation.Calculations calc = new Calculation.Calculations();
-                    table = calc.Calculate(task.FirstOrDefault().MinT1, task.FirstOrDefault().MinT2, task.FirstOrDefault().MaxT1, task.FirstOrDefault().MaxT2, task.FirstOrDefault().Function, task.FirstOrDefault().ConditionsSecType, task.FirstOrDefault().Accuracy);
-                    dataGridView1.DataSource = table;
-                    dataGridView1.Sort(dataGridView1.Columns["Value"], ListSortDirection.Ascending);
+                    using (Calculation.TaskContext dbase = new Calculation.TaskContext())
+                    {
+                        string variant = VariantCombobox.SelectedItem.ToString();
+                        var task = dbase.Tasks.Where(p => p.Variant.ToString() == variant);
+                        Calculation.Calculations calc = new Calculation.Calculations();
+                        table = calc.Calculate(task.FirstOrDefault().MinT1, task.FirstOrDefault().MinT2, task.FirstOrDefault().MaxT1, task.FirstOrDefault().MaxT2, func, conditionsSecType, task.FirstOrDefault().Accuracy);
+                        dataGridView1.DataSource = table;
+                        dataGridView1.Sort(dataGridView1.Columns["Value"], ListSortDirection.Ascending);
                         ResultLabel.Text = "Оптимальное значение целевой функции " + dataGridView1.Rows[0].Cells[2].Value.ToString() + " достигается при T1 = " + dataGridView1.Rows[0].Cells[0].Value.ToString() + " и T2 = " + dataGridView1.Rows[0].Cells[1].Value.ToString();
                     }
+                }
             }
             catch (Exception ex)
             {
@@ -83,18 +93,23 @@ namespace Optimiz_Kurs
         private void Build2DChartButton_Click(object sender, EventArgs e)
         {
             Chart2DForm form = null;
-            if (MessageBox.Show("Пересчитать данные для графика?", "Выбор отрисовки", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            var result = MessageBox.Show("Пересчитать данные для графика?", "Выбор отрисовки", MessageBoxButtons.YesNoCancel);
+            if (result == DialogResult.Yes)
             {
                 using (Calculation.TaskContext dbase = new Calculation.TaskContext())
                 {
                     string variant = VariantCombobox.SelectedItem.ToString();
                     var task = dbase.Tasks.Where(p => p.Variant.ToString() == variant);
-                    form = new Chart2DForm(0, task.FirstOrDefault().MinT1, task.FirstOrDefault().MinT2, task.FirstOrDefault().MaxT1, task.FirstOrDefault().MaxT2);
+                    form = new Chart2DForm(func, conditionsSecType, task.FirstOrDefault().MinT1, task.FirstOrDefault().MinT2, task.FirstOrDefault().MaxT1, task.FirstOrDefault().MaxT2);
                 }
+            }
+            else if(result == DialogResult.No)
+            {
+                form = new Chart2DForm(table);
             }
             else
             {
-                form = new Chart2DForm(table);
+                return;
             }
 
             this.Hide();

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Optimiz_Kurs.Calculation
 {
-    class Calculations
+    public class Calculations
     {
-        public DataTable Calculate(double minT1, double minT2, double maxT1, double maxT2, string function, string secondtypecond, double accuracy)
+        public DataTable Calculate(double minT1, double minT2, double maxT1, double maxT2, Func<double, double, double> function, Func<double, double, bool> restrictions, double accuracy)
         {
             DataTable table = new DataTable();
 
@@ -19,15 +19,10 @@ namespace Optimiz_Kurs.Calculation
             table.Columns.Add("T2", typeof(double));
             table.Columns.Add("Value", typeof(double));
 
-            for (double i = minT1; i < maxT1; i+=accuracy)
-                for (double j = minT2; j < maxT2; j+=accuracy)
-                {
-                    if (i+0.5*j <= 1)
-                    {
-                        double S = 1.0 * (2.0 * 1.0) * (Math.Pow((i - j), 2) + Math.Pow((1.0 * 1.0 - i), 2));
-                        table.Rows.Add(Math.Round(i,2), Math.Round(j,2), Math.Round(S*100, 0));
-                    }
-                }
+            for (double i = minT1; i < maxT1; i += accuracy)
+                for (double j = minT2; j < maxT2; j += accuracy)
+                    if (restrictions(i, j))
+                        table.Rows.Add(Math.Round(i, 3), Math.Round(j, 3), Math.Round(function(i, j), 0));
             return table;
         }
     }

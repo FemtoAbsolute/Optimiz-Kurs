@@ -15,10 +15,10 @@ namespace Optimiz_Kurs
             DrawChart();
         }
 
-        public Chart2DForm(int funcNum, double minT1, double minT2, double maxT1, double maxT2)
+        public Chart2DForm(Func<double, double, double> function, Func<double, double, bool> restrictions, double minT1, double minT2, double maxT1, double maxT2)
         {
             InitializeComponent();
-            DrawChart(funcNum, minT1, minT2, maxT1, maxT2);
+            DrawChart(function, restrictions, minT1, minT2, maxT1, maxT2);
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -66,55 +66,49 @@ namespace Optimiz_Kurs
             }
         }
 
-        public void DrawChart(int funcNum, double minT1, double minT2, double maxT1, double maxT2)
+        public void DrawChart(Func<double, double, double> function, Func<double, double, bool> restrictions, double minT1, double minT2, double maxT1, double maxT2)
         {
-            if(funcNum == 0)
+            for (double x = minT1; x <= maxT1; x += 0.01)
             {
-                for (double x = minT1; x <= maxT1; x += 0.01)
+                for (double y = minT2; y <= maxT2; y += 0.01)
                 {
-                    for (double y = minT2; y <= maxT2; y += 0.01)
-                    {
-                        if (!(x + y/2 <= 1))
-                            continue;
+                    if (!restrictions(x, y))
+                        continue;
 
-                        double S = Functions.f0(x, y);
-                        S = S >= 1000 ? Math.Round(S / 100, 0) * 100 : Math.Round(S / 10, 0) * 10;
-                        
-                        if (S == 50)
-                        {
-                            chart1.Series[0].Points.AddXY(x, y);
-                        }
-                        else if (S == 250)
-                        {
-                            chart1.Series[1].Points.AddXY(x, y);
-                        }
-                        else if(S == 500)
-                        {
-                            chart1.Series[2].Points.AddXY(x, y);
-                        }
-                        else if(S == 1000)
-                        {
-                            chart1.Series[3].Points.AddXY(x, y);
-                        }
-                        else if(S == 2000)
-                        {
-                            chart1.Series[4].Points.AddXY(x, y);
-                        }
-                        else if(S == 3000)
-                        {
-                            chart1.Series[5].Points.AddXY(x, y);
-                        }
-                        else if(S == 5000)
-                        {
-                            chart1.Series[6].Points.AddXY(x, y);
-                        }
+                    double S = function(x, y);
+                    S = S >= 1000 ? Math.Round(S / 100, 0) * 100 : Math.Round(S / 10, 0) * 10;
+                    
+                    if (S == 50)
+                    {
+                        chart1.Series[0].Points.AddXY(x, y);
+                    }
+                    else if (S == 250)
+                    {
+                        chart1.Series[1].Points.AddXY(x, y);
+                    }
+                    else if(S == 500)
+                    {
+                        chart1.Series[2].Points.AddXY(x, y);
+                    }
+                    else if(S == 1000)
+                    {
+                        chart1.Series[3].Points.AddXY(x, y);
+                    }
+                    else if(S == 2000)
+                    {
+                        chart1.Series[4].Points.AddXY(x, y);
+                    }
+                    else if(S == 3000)
+                    {
+                        chart1.Series[5].Points.AddXY(x, y);
+                    }
+                    else if(S == 5000)
+                    {
+                        chart1.Series[6].Points.AddXY(x, y);
                     }
                 }
             }
-            else if (funcNum == 1)
-            {
-
-            }
+            
         }
     }
 }
