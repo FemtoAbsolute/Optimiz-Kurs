@@ -67,6 +67,9 @@ namespace Optimiz_Kurs
             this.graph3Dbutton = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.ResultLabel = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.DragControl = new Optimiz_Kurs.DragControl();
             this.DragControl2 = new Optimiz_Kurs.DragControl();
             this.panel1.SuspendLayout();
@@ -80,6 +83,7 @@ namespace Optimiz_Kurs
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // Timer
@@ -315,7 +319,6 @@ namespace Optimiz_Kurs
             this.FunctionTextbox.Location = new System.Drawing.Point(6, 28);
             this.FunctionTextbox.Multiline = true;
             this.FunctionTextbox.Name = "FunctionTextbox";
-            this.FunctionTextbox.ReadOnly = true;
             this.FunctionTextbox.Size = new System.Drawing.Size(549, 29);
             this.FunctionTextbox.TabIndex = 66;
             // 
@@ -423,10 +426,10 @@ namespace Optimiz_Kurs
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(41)))), ((int)(((byte)(71)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(504, 319);
+            this.dataGridView1.Location = new System.Drawing.Point(504, 331);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(458, 214);
+            this.dataGridView1.Size = new System.Drawing.Size(458, 202);
             this.dataGridView1.TabIndex = 77;
             // 
             // CalculateButton
@@ -434,7 +437,7 @@ namespace Optimiz_Kurs
             this.CalculateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CalculateButton.Location = new System.Drawing.Point(1065, 48);
             this.CalculateButton.Name = "CalculateButton";
-            this.CalculateButton.Size = new System.Drawing.Size(182, 69);
+            this.CalculateButton.Size = new System.Drawing.Size(182, 61);
             this.CalculateButton.TabIndex = 78;
             this.CalculateButton.Text = "Расчитать значения";
             this.CalculateButton.UseVisualStyleBackColor = true;
@@ -443,9 +446,9 @@ namespace Optimiz_Kurs
             // Build2DChartButton
             // 
             this.Build2DChartButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Build2DChartButton.Location = new System.Drawing.Point(1065, 123);
+            this.Build2DChartButton.Location = new System.Drawing.Point(1065, 115);
             this.Build2DChartButton.Name = "Build2DChartButton";
-            this.Build2DChartButton.Size = new System.Drawing.Size(182, 98);
+            this.Build2DChartButton.Size = new System.Drawing.Size(182, 61);
             this.Build2DChartButton.TabIndex = 78;
             this.Build2DChartButton.Text = "Построить 2D-график";
             this.Build2DChartButton.UseVisualStyleBackColor = true;
@@ -454,13 +457,13 @@ namespace Optimiz_Kurs
             // graph3Dbutton
             // 
             this.graph3Dbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.graph3Dbutton.Location = new System.Drawing.Point(1065, 227);
+            this.graph3Dbutton.Location = new System.Drawing.Point(1065, 182);
             this.graph3Dbutton.Name = "graph3Dbutton";
-            this.graph3Dbutton.Size = new System.Drawing.Size(182, 85);
+            this.graph3Dbutton.Size = new System.Drawing.Size(182, 60);
             this.graph3Dbutton.TabIndex = 78;
             this.graph3Dbutton.Text = "Построить 3D-график";
             this.graph3Dbutton.UseVisualStyleBackColor = true;
-            this.graph3Dbutton.Click += new System.EventHandler(this.CalculateButton_Click);
+            this.graph3Dbutton.Click += new System.EventHandler(this.Build3DChartButton_Click);
             // 
             // groupBox8
             // 
@@ -483,6 +486,41 @@ namespace Optimiz_Kurs
             this.ResultLabel.Size = new System.Drawing.Size(267, 186);
             this.ResultLabel.TabIndex = 67;
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.radioButton2);
+            this.groupBox9.Controls.Add(this.radioButton1);
+            this.groupBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox9.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox9.Location = new System.Drawing.Point(1065, 248);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(182, 64);
+            this.groupBox9.TabIndex = 74;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Тип экстремума";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(72, 26);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(64, 28);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "Max";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(7, 26);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(59, 28);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Min";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // DragControl
             // 
             this.DragControl.selectControl = this.panel1;
@@ -497,6 +535,7 @@ namespace Optimiz_Kurs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(41)))), ((int)(((byte)(71)))));
             this.ClientSize = new System.Drawing.Size(1259, 551);
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.graph3Dbutton);
             this.Controls.Add(this.Build2DChartButton);
@@ -533,6 +572,8 @@ namespace Optimiz_Kurs
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox8.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -576,6 +617,9 @@ namespace Optimiz_Kurs
         private System.Windows.Forms.Button graph3Dbutton;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Label ResultLabel;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 

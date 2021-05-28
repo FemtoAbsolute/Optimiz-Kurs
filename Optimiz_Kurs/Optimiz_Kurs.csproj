@@ -45,6 +45,27 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="OpenControls.Wpf.Serialisation">
+      <HintPath>..\packages\3D\OpenControls.Wpf.Serialisation.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenControls.Wpf.SurfacePlot">
+      <HintPath>..\packages\3D\OpenControls.Wpf.SurfacePlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenControls.Wpf.Utilities">
+      <HintPath>..\packages\3D\OpenControls.Wpf.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\3D\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl">
+      <HintPath>..\packages\3D\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Sprache, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sprache.2.2.0\lib\net45\Sprache.dll</HintPath>
+    </Reference>
+    <Reference Include="Sprache.Calc, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sprache.Calc.1.1.0\lib\netstandard2.0\Sprache.Calc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -65,12 +86,17 @@
     <Compile Include="Calculation\DragControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Calculation\Functions.cs" />
     <Compile Include="Forms\Chart2DForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Chart2DForm.Designer.cs">
       <DependentUpon>Chart2DForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Chart3DForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Chart3DForm.Designer.cs">
+      <DependentUpon>Chart3DForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ResearchForm.cs">
       <SubType>Form</SubType>
@@ -118,6 +144,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Chart2DForm.resx">
       <DependentUpon>Chart2DForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Chart3DForm.resx">
+      <DependentUpon>Chart3DForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResearchForm.resx">
       <DependentUpon>ResearchForm.cs</DependentUpon>
